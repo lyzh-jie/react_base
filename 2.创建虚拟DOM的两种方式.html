@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>创建虚拟DOM的两种方式</title>
+</head>
+<body>
+  <div id="example1"></div>
+  <div id="example2"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/javascript">
+    //第一种方式纯js react提供的一些API，创建js对象 用的不多
+    // 1.创建虚拟DOM
+    const vDom = React.createElement('h1',{id:'myTest1'},'helloReact');
+    // 2.渲染虚拟DOM
+    ReactDOM.render(vDom,document.getElementById('example1'));
+  </script>
+  <script type="text/babel">
+    //第二种使用jsx方式创建
+    const vDomJsx = <h1 id="myTest2">hello word</h1>
+    ReactDOM.render(vDomJsx,document.getElementById('example2'));
+  </script>
+</body>
+</html>
