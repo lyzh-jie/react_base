@@ -22,7 +22,9 @@
   </script>
   <script type="text/babel">
     //第二种使用jsx方式创建
-    const vDomJsx = <h1 id="myTest2">hello word</h1>
+//    const vDomJsx = <h1 id="myTest2">hello word</h1>
+    const msg = 'hello word';
+    const vDomJsx = <h1 id="myTest3">{msg.toUpperCase()}</h1>
 //    debugger
     ReactDOM.render(vDomJsx,document.getElementById('example2'));
   </script>
