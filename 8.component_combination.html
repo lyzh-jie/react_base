@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>combination of component</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/prop-types.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    class App extends React.Component{
+      constructor(props){
+        super(props)
+        this.state = {
+          list:['吃饭','睡觉','打豆豆']
+        }
+        this.add = this.add.bind(this);
+      }
+      add(todo){
+           const {list} = this.state;
+           list.unshift(todo);
+           console.log(list);
+           this.setState({list});
+      }
+      render(){
+        const {list} = this.state
+        return (
+          <div>
+            <h1>Simple Todo List</h1>
+            <AddToDo count={list.length} add={this.add}/>
+            <List list={list}/>
+          </div>
+        )
+      }
+    }
+    class AddToDo extends React.Component{
+      constructor(props){
+        super(props)
+        this.handleClick = this.handleClick.bind(this);
+      }
+      handleClick(){
+//        检查输入类型
+       const todo = this.msgInput.value.trim();
+//        不合法怎么办
+        if(!todo){
+          console.log('不合格');
+          return;
+        }
+//        合法怎么办
+        console.log(todo);
+        console.log(this.props.add);
+        this.props.add(todo);
+//        清空输入
+        this.msgInput.value = '';
+      }
+      render(){
+        return(
+          <div>
+            <input type="text" ref={input => this.msgInput = input}/>
+            <button onClick={this.handleClick}>add #{this.props.count +1}</button>
+          </div>
+        )
+      }
+    }
+    AddToDo.propTypes = {
+      add:PropTypes.func.isRequired
+    }
+    class List extends React.Component{
+      constructor(props){
+        super(props)
+      }
+      render(){
+        console.log(this.props.list);
+        return (
+          <ul>{this.props.list.map((item,index) => <li key={index}>{item}</li>)}</ul>
+        )
+      }
+    }
+    ReactDOM.render(<App/>,document.getElementById('box'))
+  </script>
+</body>
+</html>

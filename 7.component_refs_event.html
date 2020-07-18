@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>refs and event</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/prop-types.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    class MyComponent extends React.Component{
+      constructor(props){
+        super(props)
+        this.handleInput = this.handleInput.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+      }
+      handleInput(){
+        console.log(this.refs.content.value);
+//        alert(this.msgInput.value);
+      }
+      handleBlur(event){
+        alert(event.target.value);
+      }
+      render(){
+        return (
+          <div>
+            <input type="text" ref="content"/>&nbsp;&nbsp;
+            <button onClick={this.handleInput}>提示输入的数据</button>&nbsp;&nbsp;
+            <input type="text" placeholder="失去焦点显示数据" onBlur={this.handleBlur}/>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<MyComponent/>,document.getElementById('box'))
+  </script>
+
+</body>
+</html>
