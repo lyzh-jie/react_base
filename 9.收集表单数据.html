@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>收集表单数据</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    class FormDataCollection extends React.Component{
+      constructor(props){
+        super(props)
+        this.state = {
+          pwd:''
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePwd = this.handlePwd.bind(this);
+      }
+      handleSubmit(event){
+        event.preventDefault();
+        console.log('用户名为'+this.nameInput.value);
+        const nameValue = this.nameInput.value;
+        const name = this.nameInput.value;
+        const {pwd} = this.state;
+        alert(`用户名为${name}，密码为${pwd}`);
+      }
+      handlePwd(event){
+        const pwdChange = event.target.value;
+        this.setState({pwd:pwdChange});
+
+      }
+      render(){
+        return(
+          <form action="http://baidu.com" onSubmit={this.handleSubmit}>
+            用户名：<input type="text" ref={input => this.nameInput = input}/>
+            密码：<input type="text" value={this.state.pwd} onChange={this.handlePwd}/>
+            <input type="submit" value="提交表单"/>
+          </form>
+        )
+      }
+    }
+    ReactDOM.render(<FormDataCollection/>,document.getElementById('box'));
+  </script>
+</body>
+</html>
